@@ -6,22 +6,66 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>RepRap GUI project</name>
 	<description>A new RepRap GUI to control open-source FFF printing</description>
-	
-	<!-- 
-		Declare project level dependency versions
-	 -->
+
+	<!-- Declare project level dependency versions -->
 	<properties>
 		<mig.layout.version>3.7.4</mig.layout.version>
+		<junit.version>4.10</junit.version>
 	</properties>
 
-	<!-- 
-		Project binary dependencies
-	 -->
+	<!-- Project binary dependencies -->
 	<dependencies>
-			<dependency>
-				<groupId>com.miglayout</groupId>
-				<artifactId>miglayout</artifactId>
-				<version>${mig.layout.version}</version>
-			</dependency>
+
+		<!-- Mig layout for Swing front-end dependency -->
+		<dependency>
+			<groupId>com.miglayout</groupId>
+			<artifactId>miglayout</artifactId>
+			<version>${mig.layout.version}</version>
+		</dependency>
+
+		<!-- JUnit test dependency -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+		</dependency>
+
+		<!-- 
+			Windowlicker test framework
+		 -->
+		<dependency>
+			<groupId>com.objogate.wl</groupId>
+			<artifactId>windowlicker-core</artifactId>
+			<version>1.0.0</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.objogate.wl</groupId>
+			<artifactId>windowlicker-swing</artifactId>
+			<version>1.0.0</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.objogate.wl</groupId>
+			<artifactId>windowlicker-web</artifactId>
+			<version>1.0.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.8.5</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 </project>
