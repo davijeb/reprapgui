@@ -1,43 +1,34 @@
 package com.reprap.reprapgui.endtoend;
 
+import static org.hamcrest.core.IsEqual.equalTo;
 
-import com.reprap.reprapgui.Main;
-import com.reprap.reprapgui.config.PrinterStatus;
-import com.reprap.reprapgui.printers.RepRapPrinter;
-import com.reprap.reprapgui.printers.exceptions.PrinterConnectionException;
+import com.reprap.reprapgui.config.PrinterButton;
+import com.reprap.reprapgui.gui.RepRapWindow;
 
 /**
- * The RepRapApplicationRunner is an end-to-end test runner
- * which starts up the application for us, starts a {@link RepRapGUIDriver}
- * which will look at the GUI for changes specific to each test and be called
- * from the actual @Test class itself to run the driver verification methods.
+ * The RepRapApplicationRunner is an end-to-end test runner which starts up the
+ * application for us, starts a {@link RepRapDriver} which will look at the
+ * GUI for changes specific to each test and be called from the actual @Test
+ * class itself to run the driver verification methods.
  */
 public class RepRapApplicationRunner {
-	
-	final RepRapPrinter printer;
-	
-	private final RepRapGUIDriver driver = new RepRapGUIDriver();
-	
-	public RepRapApplicationRunner(final RepRapPrinter printer) {
-		try {
-			Main.main(printer);
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
-		
-		this.printer=printer;
+
+	private final RepRapDriver driver = new RepRapDriver();
+
+	public void showMainWindowAppears() {
+		driver.hasTitle(RepRapWindow.MAIN_WINDOW_NAME);
 	}
 
-	public void connectToPrinter() throws PrinterConnectionException {
-		printer.connect();
+	public void showMainWindowHasAButtonNamedConnect() {
+		driver.connectButton().hasText(equalTo(PrinterButton.Connect.toString()));
 	}
 
-	public void showPrinterConnected() {
-		driver.showApplicationStatus(PrinterStatus.Connected);
+	public void pressConnectButton() {
+		driver.connectButton().click();
 	}
 
-	public void showPrinterConnectionFailure() {
-		driver.showApplicationStatus(PrinterStatus.ConnectionFailure);
+	public void showConnectMessageDialogue() {
+		driver.hasConnectMessageDialogue();
 	}
 
 }
