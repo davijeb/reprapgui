@@ -8,5 +8,5 @@ package com.reprap.reprapgui.config;
  *
  */
 public enum PrinterStatus {
-	Connected, Disconnected, ConnectionFailure
+	Connected, Disconnected, ConnectionFailure, DisconnectionFailure
 }
