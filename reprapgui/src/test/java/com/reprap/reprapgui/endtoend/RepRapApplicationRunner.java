@@ -3,7 +3,7 @@ package com.reprap.reprapgui.endtoend;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 import com.reprap.reprapgui.config.PrinterButton;
-import com.reprap.reprapgui.gui.RepRapWindow;
+import com.reprap.reprapgui.gui.FabricatorWindow;
 
 /**
  * The RepRapApplicationRunner is an end-to-end test runner which starts up the
@@ -16,7 +16,7 @@ public class RepRapApplicationRunner {
 	private final RepRapDriver driver = new RepRapDriver();
 
 	public void showMainWindowAppears() {
-		driver.hasTitle(RepRapWindow.MAIN_WINDOW_NAME);
+		driver.hasTitle(FabricatorWindow.MAIN_WINDOW_NAME);
 	}
 
 	public void showMainWindowHasAButtonNamedConnect() {
@@ -27,8 +27,21 @@ public class RepRapApplicationRunner {
 		driver.connectButton().click();
 	}
 
-	public void showConnectMessageDialogue() {
-		driver.hasConnectMessageDialogue();
+	public void addPortPathToTextField() {
+		driver.hasTextField("portentry", "/tty/usd-A9008FBW");
+	}
+
+	public void addBaudSpeedToTextField() {
+		driver.hasTextField("baudspeed","192000");
+	}
+	
+	public void clearTextFields() {
+		driver.clearTextField("portentry");
+		driver.clearTextField("baudspeed");
+	}
+
+	public void showsWarningDialogue() {
+		driver.hasWarningDialogue();
 	}
 
 }
