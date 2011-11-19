@@ -8,21 +8,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import net.miginfocom.swing.MigLayout;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.reprap.reprapgui.config.PrinterButton;
-import com.reprap.reprapgui.config.PrinterStatus;
-import com.reprap.reprapgui.printer.PrusaPrinter;
+import com.reprap.reprapgui.printer.GenericPrinter;
 
 /**
  * The RepRapWindow is the main User Interface for controlling the printer,
  * defining the parameters, starting builds etc.
  */
-public class FabricatorWindow extends JFrame {
+public class FabricatorWindow extends AbstractFabricatorWindow {
 
 	private static final long serialVersionUID = -7059521570271326438L;
 
@@ -31,30 +30,41 @@ public class FabricatorWindow extends JFrame {
 	public static final String CONNECTION_BUTTON_NAME = "ConnectionButton";
 	
 	@Autowired
-	private PrusaPrinter printer;
+	private GenericPrinter printer;
 
-	private final JLabel label   = new JLabel(PrinterStatus.Disconnected.toString());
+	private final JLabel portLabel = new JLabel("Port");
+	private final JLabel baudSpeedLabel = new JLabel("Baudspeed");
+	
+	private final JTextField portEntryField   = new JTextField(15);
+	private final JTextField baudspeed   = new JTextField(15);
+	
 	private final JButton button = new JButton(PrinterButton.Connect.toString());
 	
-	public FabricatorWindow(final String name) {
+	public FabricatorWindow(final String name) throws Exception {
 		super(name);
 		
 		setName(name);
-		
-		label.setName(CONNECTION_LABEL_NAME);
+
+		portEntryField.setName("portentry");
+		baudspeed.setName("baudspeed");
 		button.setName(CONNECTION_BUTTON_NAME);
 
 		final JPanel panel = new JPanel(new MigLayout());
+		
+		panel.add(portLabel);
+	    panel.add(portEntryField);
+	    panel.add(baudSpeedLabel, "gap unrelated");
+	    panel.add(baudspeed, "wrap");
+	    panel.add(button,"span, grow");
 
-		panel.add(button);
-		panel.add(label);
 		add(panel);
 		
 		button.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(final ActionEvent arg0) {
-				JOptionPane.showMessageDialog(getFrame(), printer);
+				if(validated())
+				printer.connect();
 			}
 		});
 		
@@ -62,15 +72,14 @@ public class FabricatorWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
-	
-	JFrame getFrame() {
-		return this;
-	}
 
-	/**
-	 * Entry point to application
-	 * 
-	 * @param args the runtime arg array
-	 */
-	public static void main(final String[] args) {new ClassPathXmlApplicationContext("application-context.xml").getBean("MainApplication");}
+	protected boolean validated() {
+		if(portEntryField.getText().equals("") || baudspeed.getText().equals("")) {
+			final JOptionPane pane = new JOptionPane();
+			pane.showMessageDialog(this, "Connection settings incomplete", "Connection problem", JOptionPane.WARNING_MESSAGE);
+			return false;
+		}
+		return true;
+		
+	}
 }
