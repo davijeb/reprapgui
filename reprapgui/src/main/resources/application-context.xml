@@ -6,7 +6,7 @@
 
 	<context:annotation-config />
 
-	<bean id="MainApplication" class="com.reprap.reprapgui.gui.RepRapWindow">
+	<bean id="MainApplication" class="com.reprap.reprapgui.gui.FabricatorWindow">
 		<constructor-arg name="name" value="Main"></constructor-arg>
 	</bean>
 	
