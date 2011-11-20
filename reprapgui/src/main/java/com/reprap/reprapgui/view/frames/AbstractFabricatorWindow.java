@@ -1,4 +1,4 @@
-package com.reprap.reprapgui.gui;
+package com.reprap.reprapgui.view.frames;
 
 import javax.swing.JFrame;
 

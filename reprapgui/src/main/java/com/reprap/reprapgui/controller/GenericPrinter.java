@@ -1,4 +1,4 @@
-package com.reprap.reprapgui.printer;
+package com.reprap.reprapgui.controller;
 
 public interface GenericPrinter {
 	

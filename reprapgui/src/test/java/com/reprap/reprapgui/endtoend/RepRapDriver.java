@@ -13,8 +13,8 @@ import com.objogate.wl.swing.driver.JLabelDriver;
 import com.objogate.wl.swing.driver.JOptionPaneDriver;
 import com.objogate.wl.swing.driver.JTextFieldDriver;
 import com.objogate.wl.swing.gesture.GesturePerformer;
-import com.reprap.reprapgui.config.PrinterStatus;
-import com.reprap.reprapgui.gui.FabricatorWindow;
+import com.reprap.reprapgui.view.config.PrinterStatus;
+import com.reprap.reprapgui.view.frames.FabricatorWindow;
 
 /**
  * The RepRapGUIDriver is part of the WindowLicker framework which enables GUIs

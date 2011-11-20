@@ -6,10 +6,20 @@
 
 	<context:annotation-config />
 
-	<bean id="MainApplication" class="com.reprap.reprapgui.gui.FabricatorWindow">
+	<bean id="MainApplication" class="com.reprap.reprapgui.view.frames.FabricatorWindow">
 		<constructor-arg name="name" value="Main"></constructor-arg>
 	</bean>
 	
-	<bean id="printer" class="com.reprap.reprapgui.printer.PrusaPrinter" />
+	<bean id="portPath" class="com.reprap.reprapgui.view.components.BasicJTextField">
+		<property name="name" value="portpath"></property>
+		<property name="columns" value="15"></property>
+	</bean>
+	
+	<bean id="baudSpeed" class="com.reprap.reprapgui.view.components.BasicJTextField">
+		<property name="name" value="baudspeed"></property>
+		<property name="columns" value="15"></property>
+	</bean>
+	
+	<bean id="printer" class="com.reprap.reprapgui.controller.PrusaPrinter" />
 
 </beans>

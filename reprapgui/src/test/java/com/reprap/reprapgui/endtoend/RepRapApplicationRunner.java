@@ -2,8 +2,8 @@ package com.reprap.reprapgui.endtoend;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
-import com.reprap.reprapgui.config.PrinterButton;
-import com.reprap.reprapgui.gui.FabricatorWindow;
+import com.reprap.reprapgui.view.config.PrinterButton;
+import com.reprap.reprapgui.view.frames.FabricatorWindow;
 
 /**
  * The RepRapApplicationRunner is an end-to-end test runner which starts up the

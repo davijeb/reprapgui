@@ -1,4 +1,4 @@
-package com.reprap.reprapgui.gui;
+package com.reprap.reprapgui.view.frames;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,8 +14,10 @@ import net.miginfocom.swing.MigLayout;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.reprap.reprapgui.config.PrinterButton;
-import com.reprap.reprapgui.printer.GenericPrinter;
+import com.reprap.reprapgui.controller.GenericPrinter;
+import com.reprap.reprapgui.view.components.BasicJTextField;
+import com.reprap.reprapgui.view.config.PrinterButton;
+import com.reprap.reprapgui.view.panels.FabricatorPrintPanel;
 
 /**
  * The RepRapWindow is the main User Interface for controlling the printer,
@@ -35,8 +37,11 @@ public class FabricatorWindow extends AbstractFabricatorWindow {
 	private final JLabel portLabel = new JLabel("Port");
 	private final JLabel baudSpeedLabel = new JLabel("Baudspeed");
 	
-	private final JTextField portEntryField   = new JTextField(15);
-	private final JTextField baudspeed   = new JTextField(15);
+	private final JTextField portPath1   = new JTextField(15);
+	private final JTextField baudSpeed   = new JTextField(15);
+	
+	@Autowired
+	private BasicJTextField portPath;
 	
 	private final JButton button = new JButton(PrinterButton.Connect.toString());
 	
@@ -45,16 +50,16 @@ public class FabricatorWindow extends AbstractFabricatorWindow {
 		
 		setName(name);
 
-		portEntryField.setName("portentry");
-		baudspeed.setName("baudspeed");
+		portPath1.setName("portentry");
+		baudSpeed.setName("baudspeed");
 		button.setName(CONNECTION_BUTTON_NAME);
 
-		final JPanel panel = new JPanel(new MigLayout());
+		final JPanel panel = new FabricatorPrintPanel(new MigLayout());
 		
 		panel.add(portLabel);
-	    panel.add(portEntryField);
+	    panel.add(portPath1);
 	    panel.add(baudSpeedLabel, "gap unrelated");
-	    panel.add(baudspeed, "wrap");
+	    panel.add(baudSpeed, "wrap");
 	    panel.add(button,"span, grow");
 
 		add(panel);
@@ -74,7 +79,7 @@ public class FabricatorWindow extends AbstractFabricatorWindow {
 	}
 
 	protected boolean validated() {
-		if(portEntryField.getText().equals("") || baudspeed.getText().equals("")) {
+		if(portPath1.getText().equals("") || baudSpeed.getText().equals("")) {
 			final JOptionPane pane = new JOptionPane();
 			pane.showMessageDialog(this, "Connection settings incomplete", "Connection problem", JOptionPane.WARNING_MESSAGE);
 			return false;

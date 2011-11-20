@@ -3,6 +3,8 @@ package com.reprap.reprapgui.endtoend;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import javax.swing.JTextField;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.reprap.reprapgui.printer.GenericPrinter;
+import com.reprap.reprapgui.controller.GenericPrinter;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/application-context.xml")
@@ -22,6 +24,11 @@ public class RepRapPrinterConnectTest {
 	@Autowired
 	@Spy
 	private GenericPrinter printer;
+	
+	@Autowired
+	private JTextField portPath;
+	@Autowired
+	private JTextField baudSpeed;
 
 	@Before
 	public  void init() {

@@ -1,4 +1,5 @@
-package com.reprap.reprapgui.printer;
+package com.reprap.reprapgui.controller;
+
 
 public class PrusaPrinter implements GenericPrinter {
 

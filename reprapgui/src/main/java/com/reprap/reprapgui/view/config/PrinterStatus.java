@@ -1,4 +1,4 @@
-package com.reprap.reprapgui.config;
+package com.reprap.reprapgui.view.config;
 
 /**
  * The PrinterStatus enumerations define the possible states
