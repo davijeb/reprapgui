@@ -31,8 +31,8 @@ public class IntegerTextField extends JTextField {
 			@Override
 			public void keyReleased(final KeyEvent evt) {
 				if (getText().length() > 0)
-					printController.printParametersChanged(getName(),
-							Integer.parseInt(getText()));
+				printController.printParametersChanged(getName(),
+						Integer.parseInt(getText()));
 			}
 
 			@Override
@@ -49,7 +49,13 @@ public class IntegerTextField extends JTextField {
 	/**
 	 * This document only allows integral values to be added to it.
 	 */
-	static class IntegerDocument extends PlainDocument {
+	class IntegerDocument extends PlainDocument {
+		
+		@Override
+		protected void removeUpdate(final DefaultDocumentEvent arg0) {
+			printController.printParametersChanged(getName(),0);
+		}
+
 		@Override
 		public void insertString(final int offs, final String str,
 				final AttributeSet a) throws BadLocationException {
