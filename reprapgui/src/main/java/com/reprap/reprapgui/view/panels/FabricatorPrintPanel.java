@@ -10,6 +10,7 @@ import net.miginfocom.swing.MigLayout;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.reprap.reprapgui.controller.utils.MessageConstants;
 import com.reprap.reprapgui.controller.utils.StaticConstants;
 
 @SuppressWarnings("serial")
@@ -35,10 +36,36 @@ public class FabricatorPrintPanel extends AbstractViewPanel {
 
 	}
 
+	private void setConnectedState(final boolean state) {
+		if(state) {
+			connectionStateLabel.setText(MessageConstants.STATE_DISCONNECTED);
+			printerConnectButton.setText(StaticConstants.CONNECT_BUTTON);
+		} else {
+			connectionStateLabel.setText(MessageConstants.STATE_CONNECTED);
+			printerConnectButton.setText(StaticConstants.DISCONNECT_BUTTON);
+		}
+		portLabel.setEnabled(state);
+		portPath.setEnabled(state);
+		baudSpeedLabel.setEnabled(state);
+		baudSpeed.setEnabled(state);
+	}
+	
 	@Override
 	public void modelPropertyChange(final PropertyChangeEvent evt) {
-		if(evt.getPropertyName().equals(StaticConstants.CONNECT_STATE)) {
-			connectionStateLabel.setText("Connected");
+		
+		if(evt.getPropertyName().equals(StaticConstants.ALLOW_CONNECT)) {
+			
+			printerConnectButton.setEnabled((Boolean)evt.getNewValue());
+			
+		} else if(evt.getPropertyName().equals(MessageConstants.STATE_CONNECTED)) {
+			
+			final Boolean connected = (Boolean)evt.getNewValue();
+			
+			if(connected) {
+				setConnectedState(false);
+			} else {			
+				setConnectedState(true);
+			}
 		}
 	}
 }
