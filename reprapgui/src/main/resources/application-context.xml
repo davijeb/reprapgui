@@ -1,25 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/util
+	http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
 	<context:annotation-config />
 
 	<bean id="MainApplication" class="com.reprap.reprapgui.view.frames.FabricatorWindow">
-		<constructor-arg name="name" value="Main"></constructor-arg>
+		<constructor-arg index="0" name="name" value="Main"></constructor-arg>
+		<constructor-arg index="1" name="panel" ref="printView"></constructor-arg>
 	</bean>
-	
-	<bean id="portPath" class="com.reprap.reprapgui.view.components.BasicJTextField">
-		<property name="name" value="portpath"></property>
-		<property name="columns" value="15"></property>
+
+	<bean id="printController" class="com.reprap.reprapgui.controller.PrusaPrinterController">
+		<property name="model" ref="printModel" />
+		<property name="view" ref="printView" />
 	</bean>
-	
-	<bean id="baudSpeed" class="com.reprap.reprapgui.view.components.BasicJTextField">
-		<property name="name" value="baudspeed"></property>
-		<property name="columns" value="15"></property>
+
+	<bean id="printView" class="com.reprap.reprapgui.view.panels.FabricatorPrintPanel"
+		init-method="initialise" />
+
+	<bean id="printerConnectButton" class="com.reprap.reprapgui.view.buttons.PrinterConnectButton">
+		<constructor-arg index="0">
+			<util:constant static-field="com.reprap.reprapgui.controller.utils.StaticConstants.CONNECT_BUTTON" />
+		</constructor-arg>
+		<property name="name" value="Connect"/>
+		<property name="enabled" value="false"/>
 	</bean>
-	
-	<bean id="printer" class="com.reprap.reprapgui.controller.PrusaPrinter" />
+
+	<bean id="portPath" class="com.reprap.reprapgui.view.components.StringTextField">
+		<property name="name">
+			<util:constant static-field="com.reprap.reprapgui.controller.utils.StaticConstants.PORT_TEXT_FIELD" />
+		</property>
+		<property name="columns" value="15" />
+	</bean>
+
+	<bean id="baudSpeed" class="com.reprap.reprapgui.view.components.IntegerTextField">
+		<property name="name">
+			<util:constant static-field="com.reprap.reprapgui.controller.utils.StaticConstants.BAUD_SPEED_TEXT_FIELD" />
+		</property>
+		<property name="columns" value="15" />
+	</bean>
+
+	<bean id="portLabel" class="javax.swing.JLabel">
+		<property name="text">
+			<util:constant static-field="com.reprap.reprapgui.controller.utils.StaticConstants.PORT_LABEL_TEXT" />
+		</property>
+	</bean>
+
+	<bean id="baudSpeedLabel" class="javax.swing.JLabel">
+		<property name="text">
+			<util:constant static-field="com.reprap.reprapgui.controller.utils.StaticConstants.BAUD_SPEED_LABEL_TEXT" />
+		</property>
+	</bean>
+
+	<bean id="connectionStateLabel" class="javax.swing.JLabel">
+		<property name="text">
+			<util:constant static-field="com.reprap.reprapgui.controller.utils.MessageConstants.STATE_DISCONNECTED" />
+		</property>
+		<property name="name">
+			<util:constant static-field="com.reprap.reprapgui.controller.utils.StaticConstants.CONNECT_STATE_LABEL" />
+		</property>
+	</bean>
+
+	<bean id="printModel" class="com.reprap.reprapgui.model.PrintConnectionModel" />
 
 </beans>
