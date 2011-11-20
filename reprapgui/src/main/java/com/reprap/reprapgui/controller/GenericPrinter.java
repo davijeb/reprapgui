@@ -2,6 +2,6 @@ package com.reprap.reprapgui.controller;
 
 public interface GenericPrinter {
 	
-	boolean connect();
-	boolean disconnect();
+	void connect();
+	void disconnect();
 }
