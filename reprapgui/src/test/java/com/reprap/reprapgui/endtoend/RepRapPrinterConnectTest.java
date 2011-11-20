@@ -1,9 +1,11 @@
 package com.reprap.reprapgui.endtoend;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import javax.swing.JTextField;
+import javax.swing.JButton;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.reprap.reprapgui.controller.GenericPrinter;
+import com.reprap.reprapgui.controller.PrusaPrinterController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/application-context.xml")
@@ -23,12 +25,9 @@ public class RepRapPrinterConnectTest {
 	
 	@Autowired
 	@Spy
-	private GenericPrinter printer;
+	private PrusaPrinterController printController;
 	
-	@Autowired
-	private JTextField portPath;
-	@Autowired
-	private JTextField baudSpeed;
+	@Autowired private JButton printerConnectButton;
 
 	@Before
 	public  void init() {
@@ -38,11 +37,6 @@ public class RepRapPrinterConnectTest {
 	@Test
 	public void checkMainWindowAppears() {
 		application.showMainWindowAppears();
-	}
-
-	@Test
-	public void checkMainWindowHasAButtonNamedConnect() {
-		application.showMainWindowHasAButtonNamedConnect();
 	}
 	
 	@Test
@@ -56,19 +50,19 @@ public class RepRapPrinterConnectTest {
 	}
 	
 	@Test
-	public void addOnlyPortPathToTextFieldAndPressConnect() {
+	public void addOnlyPortPathToTextFieldAndCheckConnectButtonDisabled() {
 		application.clearTextFields();
 		application.addPortPathToTextField();
-		application.pressConnectButton();
-		application.showsWarningDialogue();
+		
+		assertThat(printerConnectButton.isEnabled(), is(false));
 	}
 	
 	@Test
-	public void addOnlyBaudSpeedToTextFieldAndPressConnect() {
+	public void addOnlyBaudSpeedToTextFieldAndCheckConnectButtonDisabled() {
 		application.clearTextFields();
 		application.addBaudSpeedToTextField();
-		application.pressConnectButton();
-		application.showsWarningDialogue();
+		
+		assertThat(printerConnectButton.isEnabled(), is(false));
 	}
 	
 	@Test
@@ -78,12 +72,15 @@ public class RepRapPrinterConnectTest {
 		application.addBaudSpeedToTextField();
 		application.pressConnectButton();
 		
-		verify(printer,times(1)).connect();
+		verify(printController,times(1)).connect();
+		
+		application.showsPrinterIsConnected();
 	}
 	
 	@Test
 	public void checkConnectButtonPressed() {
 		application.pressConnectButton();
+		application.showsPrinterIsDisconnected();
 	}
 
 }
