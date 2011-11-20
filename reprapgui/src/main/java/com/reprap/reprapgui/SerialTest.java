@@ -11,13 +11,14 @@ import java.util.Enumeration;
 
 public class SerialTest implements SerialPortEventListener {
 	SerialPort serialPort;
-        /** The port we're normally going to use. */
+    
+	/** The port we're normally going to use. */
 	private static final String PORT_NAMES[] = { 
 			"/dev/tty.usbserial-A900F8BW", // Mac OS X
 			"/dev/ttyUSB0", // Linux
 			"COM3", // Windows
 			};
-	/** Buffered input stream from the port */
+	/** Buffered input stream from the port */ 
 	private InputStream input;
 	/** The output stream to the port */
 	private OutputStream output;
@@ -48,8 +49,7 @@ public class SerialTest implements SerialPortEventListener {
 
 		try {
 			// open serial port, and use class name for the appName.
-			serialPort = (SerialPort) portId.open(this.getClass().getName(),
-					TIME_OUT);
+			serialPort = (SerialPort) portId.open(this.getClass().getName(),TIME_OUT);
 
 			// set port parameters
 			serialPort.setSerialPortParams(DATA_RATE,
@@ -100,7 +100,6 @@ public class SerialTest implements SerialPortEventListener {
 				System.err.println(e.toString());
 			}
 		}
-		// Ignore all the other eventTypes, but you should consider the other ones.
 	}
 
 	public static void main(final String[] args) throws Exception {
