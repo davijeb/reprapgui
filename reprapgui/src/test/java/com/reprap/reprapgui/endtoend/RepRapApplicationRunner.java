@@ -1,7 +1,5 @@
 package com.reprap.reprapgui.endtoend;
 
-import static org.hamcrest.core.IsEqual.equalTo;
-
 import com.reprap.reprapgui.controller.utils.MessageConstants;
 import com.reprap.reprapgui.controller.utils.StaticConstants;
 import com.reprap.reprapgui.view.frames.FabricatorWindow;
@@ -20,29 +18,21 @@ public class RepRapApplicationRunner {
 		driver.hasTitle(FabricatorWindow.MAIN_WINDOW_NAME);
 	}
 
-	public void showMainWindowHasAButtonNamedConnect() {
-		driver.connectButton().hasText(equalTo(StaticConstants.CONNECT_BUTTON));
-	}
-
 	public void pressConnectButton() {
 		driver.connectButton().click();
 	}
 
-	public void addPortPathToTextField() {
-		driver.hasTextField(StaticConstants.PORT_TEXT_FIELD, "/tty/usd-A9008FBW");
+	public void canAddPortPathToTextField() {
+		driver.hasTextFieldAndValue(StaticConstants.PORT_TEXT_FIELD, "/tty/usd-A9008FBW");
 	}
 
-	public void addBaudSpeedToTextField() {
-		driver.hasTextField(StaticConstants.BAUD_SPEED_TEXT_FIELD,"192000");
+	public void canAddBaudSpeedToTextField() {
+		driver.hasTextFieldAndValue(StaticConstants.BAUD_SPEED_TEXT_FIELD,"192000");
 	}
 	
-	public void clearTextFields() {
+	public void canClearBothTextFields() {
 		driver.clearTextField(StaticConstants.PORT_TEXT_FIELD);
 		driver.clearTextField(StaticConstants.BAUD_SPEED_TEXT_FIELD);
-	}
-
-	public void showsWarningDialogue() {
-		driver.hasWarningDialogue();
 	}
 
 	public void showsPrinterIsConnected() {
@@ -51,6 +41,10 @@ public class RepRapApplicationRunner {
 
 	public void showsPrinterIsDisconnected() {
 		driver.hasLabel(StaticConstants.CONNECT_STATE_LABEL, MessageConstants.STATE_DISCONNECTED);
+	}
+
+	public void cantAddNonNumericValuesToBaudSpeedTextField() {
+		driver.hasTextFieldAndEmpty(StaticConstants.BAUD_SPEED_TEXT_FIELD,"ABCDEFGHIJ XYZ");
 	}
 
 }

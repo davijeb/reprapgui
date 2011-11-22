@@ -1,5 +1,8 @@
 package com.reprap.reprapgui.controller.utils;
 
+/**
+ * This class defines a set of visual notices to be displayed on the GUI.
+ */
 public class MessageConstants {
 	
 	/**

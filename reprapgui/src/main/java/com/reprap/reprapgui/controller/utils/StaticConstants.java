@@ -1,5 +1,10 @@
 package com.reprap.reprapgui.controller.utils;
 
+/**
+ * This class defined the model parameter names the controller will reflect to set
+ * the actual model properties. It also contains the GUI labels and visual component 
+ * names. This is also referenced in the Spring configuration to tie both worlds together.
+ */
 public class StaticConstants {
 	
 	/**

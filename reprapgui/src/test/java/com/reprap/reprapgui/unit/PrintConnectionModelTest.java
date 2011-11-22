@@ -9,6 +9,10 @@ import org.junit.Test;
 import com.reprap.reprapgui.model.PrintConnection;
 import com.reprap.reprapgui.model.PrintConnectionModel;
 
+/**
+ * This class runs unit tests on the print connection
+ * model.
+ */
 public class PrintConnectionModelTest {
 	
 	private PrintConnection printConnection;
@@ -30,5 +34,4 @@ public class PrintConnectionModelTest {
 	public void canAddBadSpeedToModel() {
 		assertThat(printConnection.getBaudSpeed(), equalTo(correctSpeed));
 	}
-
 }

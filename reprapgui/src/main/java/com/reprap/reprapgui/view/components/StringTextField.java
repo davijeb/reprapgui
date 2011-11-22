@@ -11,6 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.reprap.reprapgui.controller.PrusaPrinterController;
 
+/**
+ * This class is just a standard {@link JTextField} that has a key listener
+ * looking out for <code>keyPressed</code> events. When it finds one it tells the controller
+ * to update the model.
+ *  
+ *  Additionally it holds on to the default model and when all the text is cleared from
+ *  this field it tells the controller that the particular model property value is not
+ *  the empty string.
+ *
+ */
 @SuppressWarnings("serial")
 public class StringTextField extends JTextField {
 
@@ -22,17 +32,14 @@ public class StringTextField extends JTextField {
 		addKeyListener(new KeyListener() {
 
 			@Override
-			public void keyPressed(final KeyEvent arg0) {
-			}
-
-			@Override
 			public void keyReleased(final KeyEvent arg0) {
 				printController.printParametersChanged(getName(), getText());
 			}
 
 			@Override
-			public void keyTyped(final KeyEvent arg0) {
-			}
+			public void keyPressed(final KeyEvent arg0) {}
+			@Override
+			public void keyTyped(final KeyEvent arg0) {}
 		});
 	}
 	

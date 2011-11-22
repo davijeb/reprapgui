@@ -19,8 +19,10 @@ import com.reprap.reprapgui.view.frames.FabricatorWindow;
 import com.reprap.reprapgui.view.panels.FabricatorPrintPanel;
 
 /**
- * The RepRapGUIDriver is part of the WindowLicker framework which enables GUIs
- * to be included as part of the test program.
+ * This class defined a number of methods used to automatically
+ * interact with the actual GUI. It uses the WindowLicker framework
+ * which allows a number of assertions/tests to be carried out while
+ * actually interacting with the graphical component.
  */
 @SuppressWarnings("unchecked")
 public class RepRapDriver extends JFrameDriver {
@@ -53,38 +55,71 @@ public class RepRapDriver extends JFrameDriver {
 				named(StaticConstants.CONNECT_BUTTON), enabled());
 	}
 
+	/**
+	 * Has the frame opened an option window?
+	 */
 	public void hasConnectMessageDialogue() {
 		new JOptionPaneDriver(this, JOptionPane.class).clickOK();
 	}
 
-	public void hasTextField(final String textfield, final String textToEnter) {
+	/**
+	 * Can we find a text label with the <code>textField</code> name and does
+	 * the field contain the value <code>textToEnter</code>
+	 * @param textfield the {@link JTextField}
+	 * @param textToEnter the text value of the field
+	 */
+	public void hasTextFieldAndValue(final String textfield, final String textToEnter) {
 
 		final JTextFieldDriver driver = getTextFieldDriver(textfield);
 		driver.focusWithMouse();
 		driver.typeText(textToEnter);
 		driver.hasText(equalTo(textToEnter));
 	}
+	
+	/**
+	 * Can we find a text label with the <code>textField</code> name and does
+	 * the field contain nothing, even though we attempted to enter 
+	 * the value <code>textToEnter</code>
+	 * @param textfield the {@link JTextField}
+	 * @param textToEnter the value we tried to enter.
+	 */
+	public void hasTextFieldAndEmpty(final String textfield, final String textToEnter) {
+		
+		final JTextFieldDriver driver = getTextFieldDriver(textfield);
+		driver.focusWithMouse();
+		driver.typeText(textToEnter);
+		driver.isEmpty();
+	}
 
+	/**
+	 * Clear the entire contents from a text field
+	 * @param textfield the {@link JTextField}
+	 */
 	public void clearTextField(final String textfield) {
+		
 		final JTextFieldDriver driver = getTextFieldDriver(textfield);
 		driver.focusWithMouse();
 		driver.clearText();
 		driver.isEmpty();
 	}
 
-	public JTextFieldDriver getTextFieldDriver(final String textfield) {
+	/**
+	 * Utility method to get the text field driver given the text field
+	 * name.
+	 * @param textfield the text field name
+	 * @return the driver for the text field
+	 */
+	private JTextFieldDriver getTextFieldDriver(final String textfield) {
 		return new JTextFieldDriver(this, JTextField.class, named(textfield));
 	}
 
-	JOptionPaneDriver od = null;
-
-	public void hasWarningDialogue() {
-		od = new JOptionPaneDriver(this, JOptionPane.class, showingOnScreen());
-		od.clickOK();
-	}
-
+	/**
+	 * Can we find a component with a label named <code>name</code>
+	 * having the value <code>text</code>.
+	 * @param name the label name
+	 * @param text the label text value
+	 */
 	public void hasLabel(final String name, final String text) {
 		new JLabelDriver(this, named(name)).hasText(equalTo(text));
 	}
-
 }

@@ -9,11 +9,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.reprap.reprapgui.view.panels.FabricatorPrintPanel;
 
 /**
- * The RepRapWindow is the main User Interface for controlling the printer,
- * defining the parameters, starting builds etc.
+ * This class is the main frame for the GUI component. The panels are added using
+ * the Spring {@link Autowired} mechanism. The frame properties itself are set
+ * in an external Spring configuration file.
  */
 @SuppressWarnings("serial")
-public class FabricatorWindow extends AbstractFabricatorWindow {
+public class FabricatorWindow extends JFrame {
 
 	public static final String MAIN_WINDOW_NAME  = "Main";
 	
@@ -31,7 +32,7 @@ public class FabricatorWindow extends AbstractFabricatorWindow {
 	}
 	
 	/**
-	 * Spring is used to control the mechanism by which this class is created.
+	 * Spring is used to control the mechanism by which this class is created on the EDT.
 	 * @param args <not used>
 	 */
 	public static void main(final String[] args) {
