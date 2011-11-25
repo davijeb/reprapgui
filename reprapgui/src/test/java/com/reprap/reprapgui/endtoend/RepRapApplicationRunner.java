@@ -2,20 +2,19 @@ package com.reprap.reprapgui.endtoend;
 
 import com.reprap.reprapgui.controller.utils.MessageConstants;
 import com.reprap.reprapgui.controller.utils.StaticConstants;
-import com.reprap.reprapgui.view.frames.FabricatorWindow;
 
 /**
  * The RepRapApplicationRunner is an end-to-end test runner which starts up the
- * application for us, starts a {@link RepRapDriver} which will look at the
+ * application for us, starts a {@link PrinterConnectDriver} which will look at the
  * GUI for changes specific to each test and be called from the actual @Test
  * class itself to run the driver verification methods.
  */
 public class RepRapApplicationRunner {
 
-	private final RepRapDriver driver = new RepRapDriver();
+	private final PrinterConnectDriver driver = new PrinterConnectDriver();
 
 	public void showMainWindowAppears() {
-		driver.hasTitle(FabricatorWindow.MAIN_WINDOW_NAME);
+		driver.hasTitle(StaticConstants.APPLICATION_NAME);
 	}
 
 	public void pressConnectButton() {

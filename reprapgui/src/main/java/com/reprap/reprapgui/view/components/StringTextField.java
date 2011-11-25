@@ -9,7 +9,7 @@ import javax.swing.text.PlainDocument;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.reprap.reprapgui.controller.PrusaPrinterController;
+import com.reprap.reprapgui.controller.PrinterController;
 
 /**
  * This class is just a standard {@link JTextField} that has a key listener
@@ -22,13 +22,14 @@ import com.reprap.reprapgui.controller.PrusaPrinterController;
  *
  */
 @SuppressWarnings("serial")
-public class StringTextField extends JTextField {
+public class StringTextField extends AbstractAlphaNumericJTextField {
 
 	@Autowired
-	private PrusaPrinterController printController;
+	private PrinterController printController;
 
-	public StringTextField() {
-		super();
+	public StringTextField(final String name, final int columns) {
+		super(name, columns);
+		
 		addKeyListener(new KeyListener() {
 
 			@Override

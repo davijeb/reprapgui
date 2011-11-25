@@ -12,7 +12,7 @@ import javax.swing.text.PlainDocument;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.reprap.reprapgui.controller.PrusaPrinterController;
+import com.reprap.reprapgui.controller.PrinterController;
 
 /**
  * This class is a specialization over the standard {@link JTextField}. It differs in that
@@ -24,13 +24,14 @@ import com.reprap.reprapgui.controller.PrusaPrinterController;
  * the new (positive) integer compatible string is entered.
  */
 @SuppressWarnings("serial")
-public class IntegerTextField extends JTextField {
+public class IntegerTextField extends AbstractAlphaNumericJTextField {
 
 	@Autowired
-	private PrusaPrinterController printController;
+	private PrinterController printController;
 
-	public IntegerTextField() {
-		super();
+	public IntegerTextField(final String name, final int columns) {
+		super(name, columns);
+		
 		addKeyListener(new KeyListener() {
 
 			/**

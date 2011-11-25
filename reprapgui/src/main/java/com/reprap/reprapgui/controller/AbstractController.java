@@ -17,7 +17,6 @@ import com.reprap.reprapgui.view.panels.AbstractViewPanel;
  */
 public abstract class AbstractController implements PropertyChangeListener {
     
-    
     private final List<AbstractViewPanel> registeredViews;
     private final List<AbstractModel> registeredModels;
     
@@ -98,6 +97,8 @@ public abstract class AbstractController implements PropertyChangeListener {
                 final Method method = model.getClass().
                     getMethod("set"+propertyName, new Class[] {newValue.getClass()});
                 method.invoke(model, newValue);
+                
+                System.out.println("AbstractController.setModelProperty() " + method.toGenericString() + newValue);
                 
             } catch (final Exception ex) {
             }

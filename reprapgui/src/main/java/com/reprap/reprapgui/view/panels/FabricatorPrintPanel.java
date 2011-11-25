@@ -39,6 +39,7 @@ public class FabricatorPrintPanel extends AbstractViewPanel {
 	 * Add the labels, text fields and buttons to the panel
 	 */
 	public void initialise() {
+
 		add(portLabel);
 		add(portPath);
 		add(baudSpeedLabel, "gap unrelated");
@@ -54,6 +55,7 @@ public class FabricatorPrintPanel extends AbstractViewPanel {
 	 * @param state is true if connected
 	 */
 	private void setConnectedState(final boolean connectedState) {
+		
 		if(connectedState) {
 			connectionStateLabel.setText(MessageConstants.STATE_CONNECTED);
 			printerConnectButton.setText(StaticConstants.DISCONNECT_BUTTON);

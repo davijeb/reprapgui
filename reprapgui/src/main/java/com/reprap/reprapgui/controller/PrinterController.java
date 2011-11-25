@@ -9,12 +9,13 @@ import com.reprap.reprapgui.controller.utils.MessageConstants;
  * It also allows the model properties to be set directly using both these
  * methods and the parameter changed method.
  */
-public class PrusaPrinterController extends AbstractController {
+public class PrinterController extends AbstractController {
 
 	/**
 	 * Connect to the printer and set the model property to be connected.
 	 */
 	public void connect() {
+		System.out.println("PrinterController.connect()");
 		setModelProperty(MessageConstants.STATE_CONNECTED,true);
 	}
 

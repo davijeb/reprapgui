@@ -7,17 +7,27 @@ import javax.swing.JButton;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.reprap.reprapgui.controller.PrusaPrinterController;
+import com.reprap.reprapgui.controller.PrinterController;
 import com.reprap.reprapgui.controller.utils.StaticConstants;
 
+/**
+ * This class is a JButton that has been modified to start life as being disabled.
+ * 
+ * It has an autowired controller which is connected to the click event and will
+ * instruct the controller to either connect or disconnect from the printer.
+ *
+ */
 @SuppressWarnings("serial")
 public class PrinterConnectButton extends JButton {
 
 	@Autowired
-	private PrusaPrinterController printController;
+	private PrinterController printController;
 	
-	public PrinterConnectButton(final String name) {
-		super(name);
+	public PrinterConnectButton(final String title, final String name) {
+		super(title);
+		setName(name);
+		setEnabled(false);
+		
 		addActionListener(new ActionListener() {
 			
 			@Override

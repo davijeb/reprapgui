@@ -8,6 +8,11 @@ package com.reprap.reprapgui.controller.utils;
 public class StaticConstants {
 	
 	/**
+	 * The applications name
+	 */
+	public static final String APPLICATION_NAME      = "Name to be decided...";
+	
+	/**
 	 * Print [model] static constants
 	 */
 	public static final String PORT	        		 = "Port";
@@ -30,9 +35,17 @@ public class StaticConstants {
 	public static final String BAUD_SPEED_TEXT_FIELD = BAUD_SPEED;
 	
 	/**
-	 * Connect GUI button
+	 * Connect GUI buttons
 	 */
 	public static final String CONNECT_BUTTON      	 = "Connect";
 	public static final String DISCONNECT_BUTTON     = "Disconnect";
+	
+	/**
+	 * Axis buttons
+	 */
+	public static final String DECREMENT_BUTTON		 = "Decrement"; 
+	public static final String INCREMENT_BUTTON		 = "Increment";
+	public static final String SLIDER                = "Slider";
+	public static final String AXIS_COMMAND          = "Manual Axis Movement";
 
 }

@@ -3,9 +3,12 @@ package com.reprap.reprapgui.view.frames;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import net.miginfocom.swing.MigLayout;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.reprap.reprapgui.view.panels.AxisViewPanel;
 import com.reprap.reprapgui.view.panels.FabricatorPrintPanel;
 
 /**
@@ -15,14 +18,14 @@ import com.reprap.reprapgui.view.panels.FabricatorPrintPanel;
  */
 @SuppressWarnings("serial")
 public class FabricatorWindow extends JFrame {
-
-	public static final String MAIN_WINDOW_NAME  = "Main";
 	
 	@Autowired
-	public FabricatorWindow(final String name, final FabricatorPrintPanel panel) throws Exception {
+	public FabricatorWindow(final String name, final FabricatorPrintPanel panel, final AxisViewPanel axisPanel) throws Exception {
 		super(name);
+		setLayout(new MigLayout());
 		
-		add(panel);
+		add(panel,"wrap");
+		add(axisPanel);
 
 		setName(name);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,7 +43,7 @@ public class FabricatorWindow extends JFrame {
 			
 			@Override
 			public void run() {
-				new ClassPathXmlApplicationContext("application-context.xml").getBean(FabricatorWindow.class);
+				new ClassPathXmlApplicationContext("classpath:/test-application-context.xml").getBean(FabricatorWindow.class);
 			}
 		});
 	}

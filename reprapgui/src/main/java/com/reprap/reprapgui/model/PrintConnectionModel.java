@@ -59,7 +59,9 @@ public class PrintConnectionModel extends AbstractModel implements PrintConnecti
 	}
 
 	public void setConnected(final Boolean printerState) {
-		firePropertyChange(MessageConstants.STATE_CONNECTED, this.printerState, printerState);
+		final boolean oldState = this.printerState;
+		this.printerState = printerState;
+		firePropertyChange(MessageConstants.STATE_CONNECTED, oldState, printerState);
 		this.printerState = printerState;
 	}
 	
