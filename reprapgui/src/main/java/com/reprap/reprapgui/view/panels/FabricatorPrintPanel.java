@@ -76,7 +76,6 @@ public class FabricatorPrintPanel extends AbstractViewPanel {
 	 */
 	@Override
 	public void modelPropertyChange(final PropertyChangeEvent evt) {
-		
 		/**
 		 * IFF the port and baud speed fields are populated then we enable the 
 		 * printer button.
