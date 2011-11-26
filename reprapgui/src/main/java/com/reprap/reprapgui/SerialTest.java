@@ -14,9 +14,7 @@ public class SerialTest implements SerialPortEventListener {
     
 	/** The port we're normally going to use. */
 	private static final String PORT_NAMES[] = { 
-			"/dev/tty.usbserial-A900F8BW", // Mac OS X
-			"/dev/ttyUSB0", // Linux
-			"COM3", // Windows
+			"/dev/tty.usbserial-A900F8BW"
 			};
 	/** Buffered input stream from the port */ 
 	private InputStream input;
@@ -25,7 +23,7 @@ public class SerialTest implements SerialPortEventListener {
 	/** Milliseconds to block while waiting for port open */
 	private static final int TIME_OUT = 2000;
 	/** Default bits per second for COM port. */
-	private static final int DATA_RATE = 9600;
+	private static final int DATA_RATE = 9200;
 
 	public void initialize() {
 		CommPortIdentifier portId = null;
@@ -86,8 +84,7 @@ public class SerialTest implements SerialPortEventListener {
 	/**
 	 * Handle an event on the serial port. Read the data and print it.
 	 */
-	@Override
-	public synchronized void serialEvent(final SerialPortEvent oEvent) {
+	public synchronized void serialEvent2(final SerialPortEvent oEvent) {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
 				final int available = input.available();
@@ -101,11 +98,70 @@ public class SerialTest implements SerialPortEventListener {
 			}
 		}
 	}
+	
+	//some ascii values for for certain things
+    final static int SPACE_ASCII = 32;
+    final static int DASH_ASCII = 45;
+    final static int NEW_LINE_ASCII = 10;
+	
+	//method that can be called to send data
+    //pre style="font-size: 11px;": open serial port
+    //post: data sent to the other device
+    public void writeData(final int leftThrottle, final int rightThrottle)
+    {
+        try
+        {
+            output.write(leftThrottle);
+            output.flush();
+            //this is a delimiter for the data
+            output.write(DASH_ASCII);
+            output.flush();
+
+            output.write(rightThrottle);
+            output.flush();
+            //will be read as a byte so it is a space key
+            output.write(SPACE_ASCII);
+            output.flush();
+        }
+        catch (final Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    
+    //what happens when data is received
+    //pre style="font-size: 11px;": serial event is triggered
+    //post: processing on the data it reads
+    @Override
+	public void serialEvent(final SerialPortEvent evt) {
+        if (evt.getEventType() == SerialPortEvent.DATA_AVAILABLE)
+        {
+            try
+            {
+                final byte singleData = (byte)input.read();
+
+                if (singleData != NEW_LINE_ASCII)
+                {
+                   System.out.println("SerialTest.serialEvent() " + singleData);
+                }
+                else
+                {
+                }
+            }
+            catch (final Exception e)
+            {
+               e.printStackTrace();
+            }
+        }
+    }
+
 
 	public static void main(final String[] args) throws Exception {
 		final SerialTest main = new SerialTest();
 		main.initialize();
 		System.out.println("Started");
+		main.writeData(0, 0);
+		
 		
 	}
 }

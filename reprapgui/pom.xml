@@ -19,6 +19,9 @@
 		<mockito.version>1.8.5</mockito.version>
 		<rxtx.version>2.1.7</rxtx.version>
 		<logback.version>0.9.29</logback.version>
+		<cglib.version>2.2.2</cglib.version>
+		<ockito.version>1.0.0</ockito.version>
+		<findbugs.version>1.4</findbugs.version>
 	</properties>
 
 	<!-- Project binary dependencies -->
@@ -146,15 +149,36 @@
 		<dependency>
 			<groupId>maven-plugins</groupId>
 			<artifactId>maven-findbugs-plugin</artifactId>
-			<version>1.4</version>
+			<version>${findbugs.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.springockito</groupId>
 			<artifactId>springockito</artifactId>
-			<version>1.0.0</version>
+			<version>${ockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- 
+			cglib is a powerful, high performance and quality Code Generation Library. 
+			It is used to extend JAVA classes and implements interfaces at runtime.
+		 -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>${cglib.version}</version>
 		</dependency>
 		
+		<!-- 
+			Not sure we really want this as a replacement for Windowlicker...
+		 -->
+		<dependency>
+			<groupId>org.easytesting</groupId>
+			<artifactId>fest-swing</artifactId>
+			<version>1.2.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

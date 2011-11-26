@@ -15,7 +15,6 @@ public class PrinterController extends AbstractController {
 	 * Connect to the printer and set the model property to be connected.
 	 */
 	public void connect() {
-		System.out.println("PrinterController.connect()");
 		setModelProperty(MessageConstants.STATE_CONNECTED,true);
 	}
 

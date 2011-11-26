@@ -16,6 +16,11 @@
 	<context:component-scan base-package="com.reprap.reprapgui.controller" />
 
 	<mockito:spy beanName="printController" />
+	<bean id="printController2" class="com.reprap.reprapgui.controller.PrinterController" lazy-init="true">
+	    <property name="model" ref="printModel" />
+		<property name="view" ref="printView" />
+	</bean>
+
 	<mockito:spy beanName="axisController" />
 
 </beans>

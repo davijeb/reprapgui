@@ -33,7 +33,7 @@ public abstract class AbstractController implements PropertyChangeListener {
      * model property changes and propagate them on to registered views. In addition,
      * it is also responsible for resetting the model properties when a view changes
      * state.
-     * @param model The model to be added
+     * @param model the model to be added
      */
     public void setModel(final AbstractModel model) {
         registeredModels.add(model);
@@ -41,8 +41,8 @@ public abstract class AbstractController implements PropertyChangeListener {
     }
 
     /**
-     * Unbinds a model from this controller.
-     * @param model The model to be removed
+     * Un-binds a model from this controller.
+     * @param model the model to be removed
      */
     public void removeModel(final AbstractModel model) {
         registeredModels.remove(model);
@@ -90,15 +90,13 @@ public abstract class AbstractController implements PropertyChangeListener {
      * @param newValue An object that represents the new value of the property.
      */
     protected void setModelProperty(final String propertyName, final Object newValue) {
-        
+
         for (final AbstractModel model: registeredModels) {
             try {
                 
                 final Method method = model.getClass().
                     getMethod("set"+propertyName, new Class[] {newValue.getClass()});
                 method.invoke(model, newValue);
-                
-                System.out.println("AbstractController.setModelProperty() " + method.toGenericString() + newValue);
                 
             } catch (final Exception ex) {
             }

@@ -43,7 +43,7 @@ public class FabricatorWindow extends JFrame {
 			
 			@Override
 			public void run() {
-				new ClassPathXmlApplicationContext("classpath:/test-application-context.xml").getBean(FabricatorWindow.class);
+				new ClassPathXmlApplicationContext("classpath:/application-context.xml").getBean(FabricatorWindow.class);
 			}
 		});
 	}

@@ -5,17 +5,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.reprap.reprapgui.controller.AxisController;
 import com.reprap.reprapgui.controller.utils.Axis;
 
 @SuppressWarnings("serial")
 public class AxisButton extends JButton {
 	
-	@Autowired
 	private AxisController axisController;
-	
 	private final Axis axis;
 
 	public AxisButton(final Axis axis) {
@@ -35,5 +31,10 @@ public class AxisButton extends JButton {
 				axisController.moveAxis(axis);
 			}
 		});
+	}
+	
+	public JButton addController(final AxisController axisController) {
+		this.axisController = axisController;
+		return this;
 	}
 }
