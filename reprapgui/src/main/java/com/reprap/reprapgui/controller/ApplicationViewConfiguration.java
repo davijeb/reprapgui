@@ -6,12 +6,10 @@ import javax.swing.JTextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 
 import com.reprap.reprapgui.controller.utils.Axis;
 import com.reprap.reprapgui.controller.utils.MessageConstants;
 import com.reprap.reprapgui.controller.utils.StaticConstants;
-import com.reprap.reprapgui.model.AbstractModel;
 import com.reprap.reprapgui.view.buttons.AxisButton;
 import com.reprap.reprapgui.view.buttons.PrinterConnectButton;
 import com.reprap.reprapgui.view.components.IntegerTextField;
@@ -24,7 +22,6 @@ import com.reprap.reprapgui.view.panels.FabricatorPrintPanel;
 @Configuration
 public class ApplicationViewConfiguration {
 	
-	@Autowired(required=true) AbstractModel printModel, axisModel;
 	@Autowired Axis axisXUp, axisXDown, axisYUp, axisYDown, axisZUp, axisZDown;
 	
 	/**
@@ -32,6 +29,7 @@ public class ApplicationViewConfiguration {
 	 * @throws Throwable 
 	 */
 	@Bean
+	@Autowired
 	public FabricatorWindow MainApplication() throws Throwable {
 		return new FabricatorWindow(StaticConstants.APPLICATION_NAME, printView(), axisView());
 	}
@@ -42,26 +40,6 @@ public class ApplicationViewConfiguration {
 	@Bean(initMethod="initialise")
 	public FabricatorPrintPanel printView() {
 		return new FabricatorPrintPanel();
-	}
-	
-	@Bean
-	public PrinterController printController() {
-		final PrinterController printerController = new PrinterController();
-		printerController.setModel(printModel);
-		printerController.setView(printView());
-		
-		return printerController;
-	}
-	
-	
-	@Bean
-	@Lazy(value=true)
-	public AxisController axisController() {
-		 final AxisController axisController = new AxisController();
-		 axisController.setModel(axisModel);
-		 axisController.setView(axisView());
-		 
-		 return axisController;
 	}
 	
 	@Bean(initMethod="initialise")
