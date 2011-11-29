@@ -33,10 +33,10 @@
 	</scm>
 
 	<distributionManagement>
-		<site>
+		<repository>
 			<id>github-project-site</id>
-			<url>gitsite:git@github.com:davijeb/reprapgui.git</url>
-		</site>
+			<url>gitreleases:git@github.com:davijeb/reprapgui.git</url>
+		</repository>
 	</distributionManagement>
 
 	<!-- Project binary dependencies -->
