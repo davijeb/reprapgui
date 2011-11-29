@@ -1,4 +1,4 @@
-package com.reprap.reprapgui.endtoend;
+package com.reprap.reprapgui.endtoend.driver;
 
 import static org.hamcrest.Matchers.equalTo;
 
@@ -36,6 +36,11 @@ public class AxisConnectDriver extends JFrameDriver {
 				named(StaticConstants.APPLICATION_NAME), showingOnScreen()),
 				new AWTEventQueueProber(100,2000));
 	}
+	
+	public void showMainWindowAppears() {
+		hasTitle(StaticConstants.APPLICATION_NAME);
+	}
+
 
 	/**
 	 * Check GUI label value against the {@link PrinterStatus} value.

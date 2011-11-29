@@ -1,7 +1,8 @@
-package com.reprap.reprapgui.endtoend;
+package com.reprap.reprapgui.endtoend.runner;
 
 import com.reprap.reprapgui.controller.utils.MessageConstants;
 import com.reprap.reprapgui.controller.utils.StaticConstants;
+import com.reprap.reprapgui.endtoend.driver.PrinterConnectDriver;
 
 /**
  * The RepRapApplicationRunner is an end-to-end test runner which starts up the
@@ -10,8 +11,12 @@ import com.reprap.reprapgui.controller.utils.StaticConstants;
  * class itself to run the driver verification methods.
  */
 public class RepRapApplicationRunner {
+	
+	public RepRapApplicationRunner() {
+		driver = new PrinterConnectDriver();
+	}
 
-	private final PrinterConnectDriver driver = new PrinterConnectDriver();
+	private final PrinterConnectDriver driver;
 
 	public void showMainWindowAppears() {
 		driver.hasTitle(StaticConstants.APPLICATION_NAME);
@@ -44,6 +49,14 @@ public class RepRapApplicationRunner {
 
 	public void cantAddNonNumericValuesToBaudSpeedTextField() {
 		driver.hasTextFieldAndEmpty(StaticConstants.BAUD_SPEED_TEXT_FIELD,"ABCDEFGHIJ XYZ");
+	}
+
+	public void hasEventLogTextArea() {
+		driver.hasTextAreaForDisplayingEventLogs(StaticConstants.EVENT_LOG_TEXT_AREA);
+	}
+
+	public void dispose() {
+		driver.dispose();
 	}
 
 }

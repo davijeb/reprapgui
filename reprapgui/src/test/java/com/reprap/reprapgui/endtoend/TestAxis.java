@@ -12,15 +12,23 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.reprap.reprapgui.controller.AxisController;
 import com.reprap.reprapgui.controller.utils.Axis;
+import com.reprap.reprapgui.endtoend.driver.AxisConnectDriver;
 
+/**
+ * This class tests that pressing the manual movement axis
+ * buttons call the correct methods on the {@link AxisController}.
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/test-application-context.xml")
-public class AxisTest {
+public class TestAxis {
 	
 	@Autowired @Spy private AxisController axisController;
 	
-	private final AxisConnectDriver driver = new AxisConnectDriver();
+	private final static AxisConnectDriver driver = new AxisConnectDriver();
 
+	@Test public void testMainWindowAppears() {
+		driver.showMainWindowAppears();
+	}
 	
 	@Test
 	public void testScreenXUpButton() {

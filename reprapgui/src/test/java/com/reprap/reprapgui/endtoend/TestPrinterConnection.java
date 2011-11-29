@@ -11,13 +11,19 @@ import javax.swing.JTextField;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.util.ReflectionTestUtils;
 
-import com.reprap.reprapgui.controller.PrinterController;
+import com.reprap.reprapgui.controller.PrinterConnectController;
+import com.reprap.reprapgui.controller.communication.SerialCommunicationsPortConnector;
+import com.reprap.reprapgui.controller.communication.SerialPortConnector;
+import com.reprap.reprapgui.endtoend.runner.RepRapApplicationRunner;
 import com.reprap.reprapgui.view.panels.FabricatorPrintPanel;
 
 /**
@@ -27,26 +33,27 @@ import com.reprap.reprapgui.view.panels.FabricatorPrintPanel;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/test-application-context.xml")
 @Configurable(value = "AppConfig")
-public class PrinterConnectTest {
+public class TestPrinterConnection {
 
-	private static RepRapApplicationRunner application = new RepRapApplicationRunner();;
+	private static RepRapApplicationRunner application;
 
-	@Autowired
-	@Spy
-	private PrinterController printController;
+	@Autowired @Spy private PrinterConnectController printController;
+	private @Mock SerialPortConnector   			 mockConnector;   // mock the serial connector
 
-	@Autowired
-	private JButton printerConnectButton;
-	@Autowired
-	private JTextField portPath, baudSpeed;
-
+	@Autowired private JButton printerConnectButton;
+	@Autowired private JTextField portPath, baudSpeed;
+	
 	@Before
 	public void init() {
-		//application = new RepRapApplicationRunner();
+		mockConnector = Mockito.mock(SerialCommunicationsPortConnector.class);
+		ReflectionTestUtils.setField(printController, "connector", mockConnector);
+		application = new RepRapApplicationRunner();
 	}
 
 	@Test
 	public void testMainWindowAppears() {
+		application.pressConnectButton();
+		application.canClearBothTextFields();
 		application.showMainWindowAppears();
 	}
 
@@ -98,12 +105,13 @@ public class PrinterConnectTest {
 
 	@Test
 	public void testAddPortPathAndBaudSpeedToTextFieldsThenConnectAndShowConnected() {
+		
 		application.canClearBothTextFields();
 		application.canAddPortPathToTextField();
 		application.canAddBaudSpeedToTextField();
 		application.pressConnectButton();
 
-		verify(printController, times(1)).connect();
+		verify(printController, times(2)).connect();
 
 		application.showsPrinterIsConnected();
 
@@ -115,7 +123,7 @@ public class PrinterConnectTest {
 	public void testPrinterCanBeDisconnectedAndThatItIsDisconnected() {
 		
 		application.showsPrinterIsConnected();
-		verify(printController, times(1)).connect();
+		verify(printController, times(2)).connect();
 		application.pressConnectButton();
 		application.showsPrinterIsDisconnected();
 	}

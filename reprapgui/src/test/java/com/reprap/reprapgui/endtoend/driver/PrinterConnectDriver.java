@@ -1,9 +1,10 @@
-package com.reprap.reprapgui.endtoend;
+package com.reprap.reprapgui.endtoend.driver;
 
 import static org.hamcrest.Matchers.equalTo;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import com.objogate.wl.swing.AWTEventQueueProber;
@@ -11,6 +12,7 @@ import com.objogate.wl.swing.driver.JButtonDriver;
 import com.objogate.wl.swing.driver.JFrameDriver;
 import com.objogate.wl.swing.driver.JLabelDriver;
 import com.objogate.wl.swing.driver.JOptionPaneDriver;
+import com.objogate.wl.swing.driver.JTextComponentDriver;
 import com.objogate.wl.swing.driver.JTextFieldDriver;
 import com.objogate.wl.swing.gesture.GesturePerformer;
 import com.reprap.reprapgui.controller.utils.MessageConstants;
@@ -121,5 +123,9 @@ public class PrinterConnectDriver extends JFrameDriver {
 	 */
 	public void hasLabel(final String name, final String text) {
 		new JLabelDriver(this, named(name)).hasText(equalTo(text));
+	}
+
+	public void hasTextAreaForDisplayingEventLogs(final String name) {
+		new JTextComponentDriver<JTextArea>(this, JTextArea.class, named(name)).hasText(equalTo(""));
 	}
 }

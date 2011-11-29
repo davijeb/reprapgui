@@ -13,7 +13,7 @@ import com.reprap.reprapgui.model.PrintConnectionModel;
  * This class runs unit tests on the print connection
  * model.
  */
-public class PrintConnectionModelTest {
+public class TestPrintConnectionModel {
 	
 	private PrintConnection printConnection;
 	
