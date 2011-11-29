@@ -48,4 +48,9 @@ public class StaticConstants {
 	public static final String SLIDER                = "Slider";
 	public static final String AXIS_COMMAND          = "Manual Axis Movement";
 
+	/**
+	 * Event log text area
+	 */
+	public static final String EVENT_LOG_TEXT_AREA   = "EventLog";
+
 }

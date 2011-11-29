@@ -11,6 +11,7 @@ public class MessageConstants {
 	public static final String STATE_CONNECTED        = "Connected";
 	public static final String STATE_DISCONNECTED 	  = "Disconnected";
 	public static final String STATE_CONNECTION_ERROR = "Connection error";
+	public static final String STATE_EVENT			  = "Event";
 	
 
 }
