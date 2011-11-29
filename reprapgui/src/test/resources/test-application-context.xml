@@ -13,9 +13,9 @@
 	http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
 	<context:annotation-config />
-	<context:component-scan base-package="com.reprap.reprapgui.controller" />
+	<context:component-scan base-package="com.reprap.reprapgui.configuration" />
 
-	<mockito:spy beanName="printController" />
-	<mockito:spy beanName="axisController" />
-
+	<mockito:spy  beanName="printController" />
+	<mockito:spy  beanName="axisController"  />
+	
 </beans>
