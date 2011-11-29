@@ -1,8 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.reprap</groupId>
 	<artifactId>reprapgui</artifactId>
-	<version>0.0.6-SNAPSHOT</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<name>RepRap GUI project</name>
 	<description>A new RepRap GUI to control open-source FFF printing</description>
 
@@ -30,6 +31,14 @@
 			scm:git:git@github.com:davijeb/reprapgui.git
 		</developerConnection>
 	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>github-project-release</id>
+			<name>Your Repo Name</name>
+			<url>git:releases://git@github.com:davijeb/reprapgui.git</url>
+		</repository>
+	</distributionManagement>
 
 	<!-- Project binary dependencies -->
 	<dependencies>
