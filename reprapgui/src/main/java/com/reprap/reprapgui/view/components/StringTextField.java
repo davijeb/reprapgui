@@ -9,7 +9,7 @@ import javax.swing.text.PlainDocument;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.reprap.reprapgui.controller.PrinterController;
+import com.reprap.reprapgui.controller.interfaces.PrinterController;
 
 /**
  * This class is just a standard {@link JTextField} that has a key listener
@@ -22,7 +22,7 @@ import com.reprap.reprapgui.controller.PrinterController;
  *
  */
 @SuppressWarnings("serial")
-public class StringTextField extends AbstractAlphaNumericJTextField {
+public class StringTextField extends AbstractAlphaNumericTextField {
 
 	@Autowired
 	private PrinterController printController;

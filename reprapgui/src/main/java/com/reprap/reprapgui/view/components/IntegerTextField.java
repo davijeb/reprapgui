@@ -12,7 +12,7 @@ import javax.swing.text.PlainDocument;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.reprap.reprapgui.controller.PrinterController;
+import com.reprap.reprapgui.controller.interfaces.PrinterController;
 
 /**
  * This class is a specialization over the standard {@link JTextField}. It differs in that
@@ -24,7 +24,7 @@ import com.reprap.reprapgui.controller.PrinterController;
  * the new (positive) integer compatible string is entered.
  */
 @SuppressWarnings("serial")
-public class IntegerTextField extends AbstractAlphaNumericJTextField {
+public class IntegerTextField extends AbstractAlphaNumericTextField {
 
 	@Autowired
 	private PrinterController printController;

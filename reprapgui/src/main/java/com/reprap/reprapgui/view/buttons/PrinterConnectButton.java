@@ -7,7 +7,7 @@ import javax.swing.JButton;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.reprap.reprapgui.controller.PrinterController;
+import com.reprap.reprapgui.controller.interfaces.PrinterController;
 import com.reprap.reprapgui.controller.utils.StaticConstants;
 
 /**

@@ -11,7 +11,7 @@ import com.reprap.reprapgui.controller.utils.StaticConstants;
 import com.reprap.reprapgui.view.buttons.AxisButton;
 
 @SuppressWarnings("serial")
-public class AxisViewPanel extends AbstractViewPanel {
+public class FabricatorAxisViewPanel extends AbstractViewPanel {
 	
 	@Autowired private AxisController axisController;
 
@@ -23,7 +23,7 @@ public class AxisViewPanel extends AbstractViewPanel {
 	/**
 	 * C'tor which sets the layout to be the MigLayout format
 	 */
-	public AxisViewPanel() {
+	public FabricatorAxisViewPanel() {
 		super(new MigLayout());
 	}
 

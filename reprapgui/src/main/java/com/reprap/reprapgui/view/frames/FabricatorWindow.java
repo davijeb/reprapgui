@@ -8,7 +8,8 @@ import net.miginfocom.swing.MigLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.reprap.reprapgui.view.panels.AxisViewPanel;
+import com.reprap.reprapgui.view.panels.FabricatorAxisViewPanel;
+import com.reprap.reprapgui.view.panels.FabricatorEventViewPanel;
 import com.reprap.reprapgui.view.panels.FabricatorPrintPanel;
 
 /**
@@ -20,12 +21,18 @@ import com.reprap.reprapgui.view.panels.FabricatorPrintPanel;
 public class FabricatorWindow extends JFrame {
 	
 	@Autowired
-	public FabricatorWindow(final String name, final FabricatorPrintPanel panel, final AxisViewPanel axisPanel) throws Exception {
+	public FabricatorWindow(
+			final String name, 
+			final FabricatorPrintPanel panel, 
+			final FabricatorAxisViewPanel axisPanel,
+			final FabricatorEventViewPanel eventLogPanel) throws Exception {
 		super(name);
+		
 		setLayout(new MigLayout());
 		
-		add(panel,"wrap");
-		add(axisPanel);
+		add(panel,    "wrap");
+		add(axisPanel,"wrap");
+		add(eventLogPanel);
 
 		setName(name);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
