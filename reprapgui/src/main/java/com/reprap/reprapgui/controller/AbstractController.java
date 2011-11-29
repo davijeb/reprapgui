@@ -39,6 +39,19 @@ public abstract class AbstractController implements PropertyChangeListener {
         registeredModels.add(model);
         model.addPropertyChangeListener(this);
     }
+    
+    /**
+     * Binds multiple models to this controller. Once added, the controller will listen for all 
+     * model property changes and propagate them on to registered views. In addition,
+     * it is also responsible for resetting the model properties when a view changes
+     * state.
+     * @param models the models to be added
+     */
+    public void setModels(final AbstractModel... models) {
+        for (final AbstractModel abstractModel : models) {
+			setModel(abstractModel);
+		}
+    }
 
     /**
      * Un-binds a model from this controller.
@@ -58,7 +71,18 @@ public abstract class AbstractController implements PropertyChangeListener {
     public void setView(final AbstractViewPanel view) {
         registeredViews.add(view);
     }
-
+    
+    /**
+     * Binds views to this controller. The controller will propagate all model property
+     * changes to each view for consideration.
+     * @param views The views to be added
+     */
+    public void setViews(final AbstractViewPanel... views) {
+        for (final AbstractViewPanel view : views) {
+			setView(view);
+		}
+    }
+    
     /**
      * Unbind a view from this controller.
      * @param view The view to be removed
