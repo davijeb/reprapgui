@@ -1,12 +1,17 @@
-package com.reprap.reprapgui.controller;
+package com.reprap.reprapgui.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.reprap.reprapgui.controller.utils.Axis;
 import com.reprap.reprapgui.model.AxisModel;
+import com.reprap.reprapgui.model.EventModel;
 import com.reprap.reprapgui.model.PrintConnectionModel;
 
+/**
+ * This class sets up the Spring IoC beans used by the model
+ * aspect of the MVC pattern.  
+ */
 @Configuration
 public class ApplicationModelConfiguration {
 
@@ -18,6 +23,11 @@ public class ApplicationModelConfiguration {
 	@Bean
 	public AxisModel axisModel() {
 		return new AxisModel();
+	}
+	
+	@Bean
+	public EventModel eventModel() {
+		return new EventModel();
 	}
 	
 	@Bean

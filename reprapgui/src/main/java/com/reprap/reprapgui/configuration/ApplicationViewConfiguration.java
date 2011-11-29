@@ -1,6 +1,7 @@
-package com.reprap.reprapgui.controller;
+package com.reprap.reprapgui.configuration;
 
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,26 +17,37 @@ import com.reprap.reprapgui.view.components.IntegerTextField;
 import com.reprap.reprapgui.view.components.MessageLabel;
 import com.reprap.reprapgui.view.components.StringTextField;
 import com.reprap.reprapgui.view.frames.FabricatorWindow;
-import com.reprap.reprapgui.view.panels.AxisViewPanel;
+import com.reprap.reprapgui.view.panels.FabricatorAxisViewPanel;
+import com.reprap.reprapgui.view.panels.FabricatorEventViewPanel;
 import com.reprap.reprapgui.view.panels.FabricatorPrintPanel;
 
+/**
+ * This class sets up the Spring IoC beans used by the view
+ * aspect of the MVC pattern.
+ */
 @Configuration
 public class ApplicationViewConfiguration {
 	
 	@Autowired Axis axisXUp, axisXDown, axisYUp, axisYDown, axisZUp, axisZDown;
 	
 	/**
-	 * Main Window
-	 * @throws Throwable 
+	 * Create the main window
+	 * @throws
 	 */
 	@Bean
 	@Autowired
 	public FabricatorWindow MainApplication() throws Throwable {
-		return new FabricatorWindow(StaticConstants.APPLICATION_NAME, printView(), axisView());
+		return new FabricatorWindow(
+				StaticConstants.APPLICATION_NAME, 
+				printView(), 
+				axisView(),
+				eventLogView());
 	}
-	
+
 	/**
-	 * Panels
+	 * --------------------------------------------------
+	 * 						Panels
+	 * --------------------------------------------------
 	 */
 	@Bean(initMethod="initialise")
 	public FabricatorPrintPanel printView() {
@@ -43,12 +55,19 @@ public class ApplicationViewConfiguration {
 	}
 	
 	@Bean(initMethod="initialise")
-	public AxisViewPanel axisView() {
-		return new AxisViewPanel();
+	public FabricatorAxisViewPanel axisView() {
+		return new FabricatorAxisViewPanel();
+	}
+	
+	@Bean(initMethod="initialise")
+	public FabricatorEventViewPanel eventLogView() {
+		return new FabricatorEventViewPanel();
 	}
 	
 	/**
-	 * Buttons
+	 * --------------------------------------------------
+	 * 						Buttons
+	 * --------------------------------------------------
 	 */
 	@Bean
 	public PrinterConnectButton printerConnectButton() {
@@ -86,7 +105,9 @@ public class ApplicationViewConfiguration {
 	}
 	
 	/**
-	 * Text fields
+	 * --------------------------------------------------
+	 * 					Text fields
+	 * --------------------------------------------------
 	 */
 	@Bean
 	public JTextField portPath() {
@@ -99,7 +120,20 @@ public class ApplicationViewConfiguration {
 	}
 	
 	/**
-	 * Labels
+	 * --------------------------------------------------
+	 * 				 	  Text areas
+	 * --------------------------------------------------
+	 */
+	@Bean
+	public JTextArea eventLogTextArea() {
+		return new JTextArea(30, 40);
+	}
+	
+
+	/**
+	 * --------------------------------------------------
+	 * 						Labels
+	 * --------------------------------------------------
 	 */
 	@Bean
 	public JLabel portLabel() {
