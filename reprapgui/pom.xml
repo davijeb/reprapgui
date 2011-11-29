@@ -30,6 +30,14 @@
 			scm:git:git@github.com:davijeb/reprapgui.git
 		</developerConnection>
 	</scm>
+	
+	<distributionManagement>
+		<repository>
+			<id>github-project-release</id>
+			<name>Your Repo Name</name>
+			<url>git:releases://git@github.com:davijeb/reprapgui.git</url>
+		</repository>
+	</distributionManagement>
 
 	<!-- Project binary dependencies -->
 	<dependencies>
