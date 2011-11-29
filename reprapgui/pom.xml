@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.reprap</groupId>
 	<artifactId>reprapgui</artifactId>
-	<version>0.0.5</version>
+	<version>0.0.6-SNAPSHOT</version>
 	<name>RepRap GUI project</name>
 	<description>A new RepRap GUI to control open-source FFF printing</description>
 
